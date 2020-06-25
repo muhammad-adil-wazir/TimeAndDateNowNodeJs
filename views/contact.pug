@@ -1,0 +1,24 @@
+﻿extends layout
+block content
+    #container.col
+        .row
+            .col-lg-1.col-md-1.col-sm-1
+            .col-lg-10.col-md-10.col-sm-10.no-padding
+                form
+                  .h1 Contact Us
+                  .form-group
+                    label(for='txtName') Name
+                    input#txtName.form-control(type='name' aria-describedby='Name' placeholder='Enter name')
+                  .form-group
+                    label(for='txtPhone') Phone
+                    input#txtPhone.form-control(type='phone' placeholder='Phone')
+                  .form-group
+                    label(for='txtEmail') Email
+                    input#txtEmail.form-control(type='email' placeholder='Email')
+                  .form-group
+                    label(for='txtMessage') Message
+                    textarea#txtMessage.form-control( placeholder='Message')
+                  button.btn.btn-primary(type='submit') Submit
+        
+    script.
+       

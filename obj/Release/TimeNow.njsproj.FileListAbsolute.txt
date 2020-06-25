@@ -1,0 +1,2 @@
+E:\Test Projects\TimeNow\TimeNow\obj\Release\TimeNow.njsproj.CoreCompileInputs.cache
+E:\Test Projects\TimeNow\TimeNow\bin\Microsoft.NodejsTools.WebRole.dll

@@ -1,0 +1,99 @@
+﻿extends layout
+
+block content
+
+    #container.col
+        .row
+            .col-lg-1.col-md-1.col-sm-1
+            .col-lg-10.col-md-10.col-sm-10.no-padding
+                .row
+                    .col-lg-9.col-md-12.col-sm-12
+                      h1#timeZone.bold
+                      p#currentTime.bold
+                        h3#currentDate.bold
+                        h5
+                            span Day of the Year : 
+                            span#currentDayOfYear.bold
+                            span  Week of the Month : 
+                            span#currentWeekOfMonth.bold
+                            span  Week of the Year : 
+                            span#currentWeekOfYear.bold
+                        hr
+                        
+                        .row
+                            .col-lg-8.col-md-12
+                                h3.bold.bg-blue.hijri-date Hijri Date
+                                h2#currentIslamicDateAr.bold
+                                h3#currentIslamicDateEn.bold
+                                h5
+                                    span Day of the Year : 
+                                    span#currentDayOfYearAr.bold
+                                    span  Week of the Month : 
+                                    span#currentWeekOfMonthAr.bold
+                                    span  Week of the Year : 
+                                    span#currentWeekOfYearAr.bold
+                            .col-lg-4.col-md-12.suntime-wrapper
+                                .row
+                                    div.col-lg-4.col-md-2.no-padding.text-center
+                                        img.inline(src='/images/sunrise.png') 
+                                        p Sunrise
+                                    div.col-lg-8.col-md-4.no-padding
+                                        h3#sunRiseTime
+                                    div.col-lg-4.col-md-2.no-padding.text-center
+                                        img.inline(src='/images/sunset.png') 
+                                        p Sunset
+                                    div.col-lg-8.col-md-4.no-padding
+                                        h3#sunSetTime
+                    .col-lg-3.col-md-12.col-sm-12.analog-clock-wrapper
+                        canvas#cvsAnalogClock
+
+        .row
+            .col-lg-1.col-md-1
+            .col-lg-10.col-md-12.no-padding
+                .row.outof-timezone-map
+                    .col-md-12.current-timezone-countries
+                        h3.bold Countries in the current Time Zone
+                        h3.currentTimeZoneCountries
+                .row
+                    .col-lg-10.col-md-12
+                        .timezone-map-wrapper.bg-blue
+                            svg.timezone-map
+                            #currentTimeZoneCountries-wrapper.current-timezone-countries
+                                h3 Countries in the current Time Zone
+                                hr
+                                .currentTimeZoneCountries
+                            .tooltip
+                    .col-lg-2.col-md-12.col-sm-12#main-cities-times-warapper             
+                        
+                
+        
+    script.
+        var countries = new Array();
+        var zones = new Array();
+        var indexs = new Array();
+        $(document).ready(function () {
+            countries = !{ JSON.stringify(countries) }
+            zones = !{ JSON.stringify(zones) }
+            //country = countries.filter(x=>x.zones.filter(z=>z == timeZone.toLowerCase()));
+            //marquee#main-cities-times-warapper(direction='down', scrollamount="1")
+        });
+        var margin = { top: 10, right: 10, bottom: 10, left: 10 };
+        var width = 1400 - margin.left - margin.right;
+        var height = 700 - margin.top - margin.bottom;
+        var projection = d3.geoNaturalEarth1()
+            .center([0, 15])
+            .rotate([-9, 0])
+            .scale([1300 / (2 * Math.PI)])
+            .translate([450, 300]);
+        var path = d3.geoPath()
+            .projection(projection);
+        var svg = d3.select("svg")
+            .append("g")
+            //.attr("width", '1400px')
+            //.attr("height", height);
+        var tooltip = d3.select("div.tooltip");
+        d3.queue()
+            .defer(d3.json, "/javascripts/world-110m.v1.json")
+            .defer(d3.csv, "/javascripts/world-country-names.csv")
+            .await(ready);
+    

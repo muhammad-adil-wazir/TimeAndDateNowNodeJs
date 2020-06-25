@@ -1,0 +1,85 @@
+﻿doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.css')
+
+    link(rel='stylesheet', href='/stylesheets/mapbox-gl.css')
+    link(rel='stylesheet', href='/stylesheets/main.css')
+    link(rel='stylesheet', href='/stylesheets/leaflet.css')
+    link(rel='stylesheet', href='/stylesheets/menu.css')
+
+    script(src='/javascripts/jquery.min.js')
+    //script(src='/javascripts/leaflet.js')
+    //script(src='/javascripts/mapbox-gl.js')
+    script(src='/javascripts/moment.min.js')
+    script(src='/javascripts/moment-timezone.min.js')
+    script(src='/javascripts/moment-hijri.js')
+    script(src='https://d3js.org/d3.v4.min.js')
+    script(src='https://d3js.org/topojson.v2.min.js')
+    script(src='https://d3js.org/d3-queue.v3.min.js')
+    script(src='/javascripts/suncalc.min.js')
+    //script(src='/javascripts/suncalc.min.js.map')
+    script(src='/javascripts/menu.js')
+    script(src='/javascripts/timenow.js')
+    script(data-ad-client='ca-pub-7209661352157956' , async='' , src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+
+  body
+    header
+      .container
+        .navbar.navbar-static-top
+          .navigation
+            nav
+              ul.nav.topnav.bold
+                li.h2.logo-text.bold Time And Date Now
+                li.dropdown.active
+                  a(href='/about/')
+                    | About Us 
+                    i.icon-angle-down
+                li.dropdown
+                  a(href='/contact/')
+                    | Contact Us 
+                    i.icon-angle-down
+                    
+                li.dropdown.hidden
+                  a(href='#')
+                    | Pages 
+                    i.icon-angle-down
+                  ul.dropdown-menu.bold
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') About us
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Pricing boxes
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') 404
+                li.dropdown.hidden
+                  a(href='#')
+                    | Portfolio 
+                    i.icon-angle-down
+                  ul.dropdown-menu.bold(style='display: none;')
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Portfolio 2 columns
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Portfolio 3 columns
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Portfolio 4 columns
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Portfolio detail
+                li.dropdown.hidden
+                  a(href='#')
+                    | Blog 
+                    i.icon-angle-down
+                  ul.dropdown-menu.bold
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Blog left sidebar
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Blog right sidebar
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Post left sidebar
+                    li
+                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Post right sidebar
+                li.hidden
+                  a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Contact 
+          // end navigation
+    block content

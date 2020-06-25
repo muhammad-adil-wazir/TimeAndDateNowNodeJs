@@ -1,0 +1,46 @@
+extends layout
+
+block content
+
+    h1 Welcome to TimeNow
+    #container.col
+        .row
+            .col-lg-6
+              p Your current time zone is 
+                span#timeZone.bold
+              p Your current Date is 
+                span#currentDate.bold
+              p#currentTime
+            .col-lg-6
+                .map#map
+
+    script.
+        document.getElementById('timeZone').innerText = moment.tz.guess();
+        var aa = moment.tz.guess();
+        var timez = Intl.DateTimeFormat().resolvedOptions();
+        var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        function updateTime(){
+        var _currentDateTime = new Date().toLocaleString("en-US", {timeZone: timezone}).split(',');
+        document.getElementById('currentDate').innerText = _currentDateTime[0];
+        document.getElementById('currentTime').innerText = _currentDateTime[1];
+        }
+        setInterval(updateTime,1000);
+        
+       //var mymap = L.map('map').setView([51.505, -0.09], 13);
+       mapboxgl.accessToken = 'pk.eyJ1IjoiYWRpbDMyMSIsImEiOiJjazQ2dXc0NGcwbWQwM21qdG1hbHozejY2In0.XhKAYb0QWgvFBvjsrMTjng';
+
+        var map = new mapboxgl.Map({
+          container: 'map', //this is the id of the container you want your map in
+          style: 'mapbox://styles/mapbox/streets-v11', // this controls the style of the map. Want to see more? Try changing 'light' to 'simple'. 
+          minZoom: 2 // We want our map to start out pretty zoomed in to start.
+        });
+
+         var mapLeaflet = L.mapbox.map('map-leaflet')
+          .setView([37.8, -96], 4)
+          .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
+
+        L.marker([38.913184, -77.031952]).addTo(mapLeaflet);
+        L.marker([37.775408, -122.413682]).addTo(mapLeaflet);
+
+        mapLeaflet.scrollWheelZoom.disable();
+      

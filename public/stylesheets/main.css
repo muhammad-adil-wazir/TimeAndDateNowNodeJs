@@ -1,0 +1,44 @@
+﻿body { padding: 5px; font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;}
+.hidden {display: none;}
+.no-padding{padding:0px;}
+.bg-blue{background-color: #5184b9;color:white;}
+.inline{display:inline;}
+a {color: #00B7FF;}
+#currentTime { font-size:calc(10vw); line-height: 8vw;}
+.hijri-date, .about-heading { padding: 1% 3%;}
+#map {height: 500px;width: 1000px;}
+#map .mapboxgl-popup-content {padding: 10px;max-width: 300px;padding-top: 20px;}
+#map .mapboxgl-popup-content ul {list-style: none; margin: 0;padding: 0;float: left;}
+#map .mapboxgl-popup-content ul h3 { margin: 0 0 10px 0;}
+#map .mapboxgl-popup-content img {float: left;width: 30px;margin-right: 10px;}
+.timezone-map-wrapper {width: 100%;height:559px; }
+.timezone-map {width: 100%;height:100%;}
+#currentTimeZoneCountries-wrapper {padding: 19px;color: white;white-space: pre;position: absolute;right: 25px;top: 15px;width: 305px;border: 1px solid;}
+#currentTimeZoneCountries-wrapper h3 {white-space: initial;}
+#main-cities-times-warapper{width:100%;overflow:hidden;}
+.main-cities-times {border: 2px solid #5184b9;border-radius: 5px;padding: 5px 9px;margin: 11px 0;box-shadow: 5px 7px 7px #aaaaaa;}
+div.tooltip {color: #222;background: #fff;border-radius: 3px;box-shadow: 0px 0px 2px 0px #a6a6a6;padding: .2em;text-shadow: #f5f5f5 0 1px 0;opacity: 0.9;position: absolute; white-space:pre;}
+.tooltip-timezone { padding:11px;position: absolute;background: #5184b9;border: 2px solid #5184b9;border-radius: 50%;white-space:pre;color:white;box-shadow: 0 1px 8px rgba(0,0,0,0.5);}
+.tooltip-timezone:after {content: ''; position: absolute;width: 15px;height: 15px;left: 50%;transform: translate(-50%,-50%) rotate(45deg); background-color: #5184b9;box-shadow: 0 1px 11px rgb(0, 0, 0);margin-top: 15px;}
+.suntime-wrapper {}
+.suntime-wrapper img {width:50px;}
+.suntime-wrapper h3 { line-height: 2.5em;}
+
+@media (min-width: 992px) {
+    .main-cities-times{width: 231px;}
+    #main-cities-times-warapper{padding:0px;}
+    .analog-clock-wrapper{padding:0;}
+    .timezone-map-wrapper .current-timezone-countries {display:block;}
+    .outof-timezone-map .current-timezone-countries {display:none;}
+}
+@media (max-width: 992px){
+    /*#cvsAnalogClock {width:100%;height:100%;}*/
+    h3,h2{font-size:3em !important;}
+    h5{font-size:1.9em !important;}
+    #currentTime{font-size: calc(14vw);line-height: 14vw;}
+    .suntime-wrapper h3 { line-height: 1.5em;}
+    .timezone-map-wrapper .current-timezone-countries {display:none;}
+    .outof-timezone-map .current-timezone-countries {display:block;white-space: pre;}
+    .outof-timezone-map .current-timezone-countries h3{padding:1% 5%;}
+    .outof-timezone-map .current-timezone-countries h3.bold{background-color: #5184b9;color: white;padding:1% 5%;}
+}
