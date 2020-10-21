@@ -1,3 +1,4 @@
+E:\Test Projects\TADN\TADN\obj\Debug\TimeAndDateNow.njsprojAssemblyReference.cache
+E:\Test Projects\TADN\TADN\obj\Debug\TimeAndDateNow.njsproj.CoreCompileInputs.cache
 E:\Test Projects\TimeAndDateNow\TimeAndDateNow\obj\Debug\TimeAndDateNow.njsprojAssemblyReference.cache
 E:\Test Projects\TimeAndDateNow\TimeAndDateNow\obj\Debug\TimeAndDateNow.njsproj.CoreCompileInputs.cache
-E:\Test Projects\TimeAndDateNow\TimeAndDateNow\bin\Microsoft.NodejsTools.WebRole.dll

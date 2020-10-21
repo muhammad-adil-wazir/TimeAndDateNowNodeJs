@@ -1,0 +1,85 @@
+﻿extends layout
+block content
+    .cover-container.d-flex.h-100.p-3.mx-auto.flex-column.container
+      header.masthead.mb-auto
+        .inner
+      main.inner.cover(role='main')
+        .row
+            h3.col-lg-12.bold.bg-blue.about-heading  Currency Converter
+        //-.row
+           //- h1.cover-heading.col-lg-6  Amount 
+           //- h1.cover-heading.col-lg-6  Convert To 
+        .row.dropdowns.text-center
+            .lead.col-lg-6
+                select#drpFromCurrency.select2(onchange='showFromCurrencyDetail()')
+                    option Convert From
+                    each currencyCountry in currencyCountries
+                     option(href='#' value=currencyCountry.currencyId) #{currencyCountry.currencyName} (#{currencyCountry.currencyId})
+                
+            .lead.col-lg-6
+                select#drpToCurrency.select2(onchange='showToCurrencyDetail()')
+                    option Convert To
+                    each currencyCountry in currencyCountries
+                     option(href='#' value=currencyCountry.currencyId) #{currencyCountry.currencyName} (#{currencyCountry.currencyId})
+        .row.text-center
+            .col-lg-6
+                input(type='number' id='txtAmount' placeholder="Write your amount here..." class='col-lg-11 text form-control' )
+            .col-lg-6
+                 input(type='button' id='btnConvert' class=' btn btn-primary  form-control col-lg-11' value='Convert' onclick='convert()')
+        .row
+            .col-lg-12
+               h1#convertedAmount.bold.text-center
+               h3#todaysRate.bold.text-center
+               hr
+        .row
+            .col-lg-6.first-currency-detail
+                table.table.table-bordered.jambo_table.table-striped
+                      tr
+                        td.bold Country:
+                        td
+                          span#spnFirstCurrencyCountryName
+                      tr
+                        td.bold Short Form:
+                        td
+                          span#spnFirstCurrencyCountryShortForm
+                      tr
+                        td.bold Currency:
+                        td
+                          span#spnFirstCurrencyName
+                      tr
+                        td.bold Currency Short Form:
+                        td
+                          span#spnFirstCurrencyShortForm 
+                      tr
+                        td.bold Currency Symbol:
+                        td 
+                            span#spnFirstCurrencySymbol
+                 
+           
+            .col-lg-6.second-currency-detail
+               table.table.table-bordered.jambo_table.table-striped
+                      tr
+                        td.bold Country:
+                        td
+                          span#spnSecondCurrencyCountryName
+                      tr
+                        td.bold Short Form:
+                        td
+                          span#spnSecondCurrencyCountryShortForm
+                      tr
+                        td.bold Currency:
+                        td
+                          span#spnSecondCurrencyName
+                      tr
+                        td.bold Currency Short Form:
+                        td
+                          span#spnSecondCurrencyShortForm 
+                      tr
+                        td.bold Currency Symbol:
+                        td 
+                          span#spnSecondCurrencySymbol
+                    
+               hr
+    script.
+        InitCurrencyConverter()
+       

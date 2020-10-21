@@ -4,12 +4,11 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/font-awesome.css')
-
     link(rel='stylesheet', href='/stylesheets/mapbox-gl.css')
     link(rel='stylesheet', href='/stylesheets/main.css')
     link(rel='stylesheet', href='/stylesheets/leaflet.css')
     link(rel='stylesheet', href='/stylesheets/menu.css')
-
+    link(rel='stylesheet', href='/stylesheets/select2.min.css')
     script(src='/javascripts/jquery.min.js')
     //script(src='/javascripts/leaflet.js')
     //script(src='/javascripts/mapbox-gl.js')
@@ -20,6 +19,9 @@ html
     script(src='https://d3js.org/topojson.v2.min.js')
     script(src='https://d3js.org/d3-queue.v3.min.js')
     script(src='/javascripts/suncalc.min.js')
+    script(src='/javascripts/PrayTimes.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/select2.min.js')
     //script(src='/javascripts/suncalc.min.js.map')
     script(src='/javascripts/menu.js')
     script(src='/javascripts/timenow.js')
@@ -32,27 +34,34 @@ html
           .navigation
             nav
               ul.nav.topnav.bold
-                li.h2.logo-text.bold Time And Date Now
-                li.dropdown.active
-                  a(href='/about/')
-                    | About Us 
-                    i.icon-angle-down
-                li.dropdown
-                  a(href='/contact/')
-                    | Contact Us 
-                    i.icon-angle-down
-                    
-                li.dropdown.hidden
-                  a(href='#')
-                    | Pages 
+                li.h2.logo-text.bold 
+                  a(href='/') Time And Date Now
+                li.dropdown.li-calender.hidden
+                  a(href='/calender')
+                    | Calender 
                     i.icon-angle-down
                   ul.dropdown-menu.bold
                     li
-                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') About us
+                      a(href='/calender') Gregorian Calender
                     li
-                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Pricing boxes
-                    li
-                      a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') 404
+                      a(href='/hijricalender') Hijri Calender
+                li.dropdown.li-namaztiming
+                  a(href='/namaztiming')
+                    | Namaz Timing 
+                    //i.icon-angle-down
+                li.dropdown.li-currencyconverter
+                  a(href='/currencyconverter')
+                    | Currency Converter
+                    //i.icon-angle-down
+                li.dropdown.li-about
+                  a(href='/about')
+                    | About Us 
+                    //i.icon-angle-down
+                li.dropdown.li-contact
+                  a(href='/contact')
+                    | Contact Us 
+                    //i.icon-angle-down
+               
                 li.dropdown.hidden
                   a(href='#')
                     | Portfolio 
@@ -83,3 +92,6 @@ html
                   a(href='https://freshdesignweb.com/3-level-responsive-drop-down-navigation-menu-jquery-css3/') Contact 
           // end navigation
     block content
+    script.
+       
+        

@@ -1,0 +1,36 @@
+﻿extends layout
+block content
+    .cover-container.d-flex.h-100.p-3.mx-auto.flex-column.container
+      header.masthead.mb-auto
+        .inner
+          
+      main.inner.cover(role='main')
+        .row
+            .col-lg-12.col-md-12.col-sm-12.no-padding
+                h3#selectedTodayNamazTiming.bold.bg-blue.about-heading 
+                h1#timeZone.bold
+                .row
+                    .col-lg-3 
+                        label Change Location:
+                        select#countries
+                            //-option(value='tan') tan
+                    .col-lg-6
+                        table#tblNamazTimeToday.table.table-bordered.jambo_table.table-striped
+        .row
+            .col-lg-12.col-md-12.col-sm-12.no-padding
+                h3#selectedMonthNamazTiming.bold.bg-blue.about-heading  
+                //-h1 
+                    //-select#countries
+                        //-option(value='tan') tan
+                //-p.col-lg-1 C
+                p.lead.col-lg-12
+                  | 
+                table#tblNamazTimeForMonth.table.table-bordered.jambo_table.table-striped
+                br
+
+        a(href="PrayTimes.org" ) Powered by PrayTimes.org
+
+    script.
+        loadNamazTimings();
+
+       

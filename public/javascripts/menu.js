@@ -15,7 +15,10 @@ jQuery(document).ready(function($) {
 		);
 		
 	(function() {
-
+        // activate the menu
+        $('ul.topnav li').removeClass('active');
+        $('ul.topnav li.li-' + _currentPage + '').addClass('active');
+        ///
 		var $menu = $('.navigation nav'),
 			optionsList = '<option value="" selected>Go to..</option>';
 

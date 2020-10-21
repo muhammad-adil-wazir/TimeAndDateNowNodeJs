@@ -1,5 +1,24 @@
 /////////////// Common - Start ////////////////////////////////
+//var countries = new Array();
+//var zones = new Array();
+function setLocationStorage(countries,zones) {
+    if (window.localStorage.getItem('countries') == null) {
+        window.localStorage.setItem('countries', JSON.stringify( countries));
+        window.localStorage.setItem('zones', JSON.stringify(zones));
+    }
+}
+function getLocationStorage() {
+    if (window.localStorage.getItem('countries') != null) {
+        countries = JSON.parse(window.localStorage.getItem('countries'));
+        zones = JSON.parse(JSON.parse(window.localStorage.getItem('zones')));
+    }
+}
 
+var indexs = new Array();
+var _pages = window.location.href.toLocaleLowerCase().split('/');
+var _currentPage = _pages[_pages.length - 1];
+var timeZonee = Intl.DateTimeFormat().resolvedOptions().timeZone;
+var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 var _mainCities = [
     { 'city': 'New York', 'country': 'United States of America', 'timezone': 'America/New_York' },
     { 'city': 'London', 'country': 'Britain (UK)', 'timezone': 'Europe/London' },
@@ -27,17 +46,17 @@ function getFullDate(objToday) {
         //var today = curHour + ":" + curMinute + "." + curSeconds + curMeridiem + " " +
         return dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
 }
-function getDayOfTheWeek() {
-        var a = new Date();
-        var weekdays = new Array(7);
-        weekdays[0] = "Sunday";
-        weekdays[1] = "Monday";
-        weekdays[2] = "Tuesday";
-        weekdays[3] = "Wednesday";
-        weekdays[4] = "Thursday";
-        weekdays[5] = "Friday";
-        weekdays[6] = "Saturday";
-        return weekdays[a.getDay()];
+function getDayOfTheWeek(date) {
+    //var a = new Date();
+    var weekdays = new Array(7);
+    weekdays[0] = "Sunday";
+    weekdays[1] = "Monday";
+    weekdays[2] = "Tuesday";
+    weekdays[3] = "Wednesday";
+    weekdays[4] = "Thursday";
+    weekdays[5] = "Friday";
+    weekdays[6] = "Saturday";
+    return weekdays[date.getDay()];
 }
 function getDayOfTheYear() {
     var now = new Date();
@@ -166,21 +185,23 @@ function drawHand(ctx, pos, length, width) {
 
 /////////////// Index Page - Start ////////////////////////////////
 
+
 //document.getElementById('timeZone').innerText = moment.tz.guess();
 //var timez = Intl.DateTimeFormat().resolvedOptions();
-var timeZonee = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 
 //var currentDay = new Date(). 
 var currentTimeZoneCountries = [];
 function updateTime() {
     //var _currentDateTime = new Date().toLocaleString("en-US", { minute: '2-digit', second: 'numeric', timeZone: timeZonee, timeZoneName: 'short' }).split(',');
-    var _currentDateTime = new Date().toLocaleString("en-US", {  timeZone: timeZonee }).split(',');
-    //document.getElementById('currentDate').innerText = _currentDateTime[0];
-    document.getElementById('currentTime').innerText = _currentDateTime[1];
+    if (_currentPage == 'home' || _currentPage == '') {
+        var _currentDateTime = new Date().toLocaleString("en-US", { timeZone: timeZonee }).split(',');
+        //document.getElementById('currentDate').innerText = _currentDateTime[0];
+        document.getElementById('currentTime').innerText = _currentDateTime[1];
+    }
 }
 setInterval(updateTime, 1000);
 setInterval(updateMainCitiesTime, 1000);
-
 //var mymap = L.map('map').setView([51.505, -0.09], 13);
 //mapboxgl.accessToken = 'pk.eyJ1IjoiYWRpbDMyMSIsImEiOiJjazQ2dXc0NGcwbWQwM21qdG1hbHozejY2In0.XhKAYb0QWgvFBvjsrMTjng';
 
@@ -189,9 +210,6 @@ setInterval(updateMainCitiesTime, 1000);
 //  style: 'mapbox://styles/mapbox/streets-v11', // this controls the style of the map. Want to see more? Try changing 'light' to 'simple'. 
 //  minZoom: 2 // We want our map to start out pretty zoomed in to start.
 //});
-
-
-
 
 function ready(error, world, names) {
     if (error) throw error;
@@ -301,13 +319,13 @@ function loadDates() {
     $('#currentDayOfYearAr').text(dayofyear);
 }
 function loadMainCitiesTime() {
-    $('#main-cities-times-warapper').html('');
+    $('#main-cities-times-wrapper').html('');
     for (var i = 0; i < _mainCities.length; i++) {
         var _time = new Date().toLocaleString("en-US", { timeZone: _mainCities[i].timezone }).split(',');
         var _mainCity = '<div class="main-cities-times" id="mainCity' + i + '"><h4>' + _mainCities[i].city + ' <small>' + _mainCities[i].country + '</small></h4> <h5>' + _time + '</h5></div>'
-        $('#main-cities-times-warapper').append(_mainCity);
+        $('#main-cities-times-wrapper').append(_mainCity);
     }
-    $('#main-cities-times-warapper').height($('#timezone-map-wrapper').height());
+    $('#main-cities-times-wrapper').height($('#timezone-map-wrapper').height());
 }
 function updateMainCitiesTime() {
     for (var i = 0; i < _mainCities.length; i++) {
@@ -324,8 +342,6 @@ function loadSunTiming() {
     $('#sunSetTime').text(zone.sunset.toLocaleTimeString());
 }
 
-
-
 /* Sun timing-end*/
 //var offset = 0;
 //var count = $(".slide-item-wrapper > * > *").length;
@@ -337,3 +353,176 @@ function loadSunTiming() {
 //        });
 //    }, 3000);
 /////////////// Index Page - End ////////////////////////////////
+
+/////////////// Namaz Timing Page - Start ////////////////////////////////
+
+function loadNamazTimings() {
+    getLocationStorage();
+    loadTimeZone();
+    var _latLong = getLatLongByTimeZone(timeZonee);
+    var sel = document.getElementById('countries');
+    var fragment = document.createDocumentFragment();
+    //countries.forEach(function (country, index) {
+    //    var opt = document.createElement('option');
+    //    opt.innerHTML = country.name;
+    //    opt.value = country.timezone;
+    //    fragment.appendChild(opt);
+    //});
+    //sel.appendChild(fragment);
+    indexs = Object.keys(countries);
+    var _zones = new Array();
+    for (const index of indexs) {
+        var keys = Object.keys(countries[index]);
+        for (const key of keys) {
+            for (var k = 0; k < countries[index][key].zones.length; k++) {
+                    var opt = document.createElement('option');
+                for (var i = 0; i < countries[index][key].zones.length; i++) {
+                    //var _zones = countries[index][key].name + ' - ' + countries[index][key].zones[i];
+                    var _zone = countries[index][key].zones[i];
+                    if (_zones.indexOf(_zone) == -1) {
+                        _zones.push(_zone);
+                        opt.innerHTML = _zone;
+                        opt.value = countries[index][key].timezone;
+                        if (countries[index][key].zones[i] == timeZonee) {
+                            opt.selected = true;
+                        }
+                        fragment.appendChild(opt);
+                        }
+                }
+            }
+        }
+    }
+    sel.appendChild(fragment);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(loadNamazTableForToday);
+        navigator.geolocation.getCurrentPosition(loadNamazTableForMonth);
+    }
+}
+
+function loadNamazTableForToday(position) {
+    prayTimes.setMethod('Karachi');
+    var date = new Date(); // today
+    var times = prayTimes.getTimes(date, [position.coords.latitude, position.coords.longitude]);
+    var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Midnight'];
+    document.getElementById('selectedTodayNamazTiming').innerText = 'Namaz Timing today ( ' + getFullDate(new Date()) + ' )';
+    var html = '<table id="timetable">';
+    //html += '<tr><th colspan="6">' + getFullDate(new Date()) + '</th></tr>';
+    html += '<tr class="d-flex">';
+    for (var i in list) {
+        html += '<td class="col-2 bold">' + list[i] + '</td>';
+    }
+    html += '</tr>';
+    html += '<tr class="d-flex">';
+    for (var i in list) {
+        html += '<td class="col-2">' + times[list[i].toLowerCase()] + '</td>';
+    }
+    html += '</tr>';
+    html += '</table>';
+    document.getElementById('tblNamazTimeToday').innerHTML = html;
+}
+
+function loadNamazTableForMonth(position) {
+    prayTimes.setMethod('MWL');
+    _todayDate = new Date();
+    var _currentMonth = _todayDate.getMonth() ;
+    var _currentYear = _todayDate.getFullYear();
+    document.getElementById('selectedMonthNamazTiming').innerText = 'Namaz Timing for ' + months[_currentMonth] + ', ' + _currentYear;
+    var _totalDays = new Date(_currentYear, (_currentMonth + 1), 0).getDate();
+    var date = new Date(); // today
+
+    var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Midnight'];
+    var html = '<table id="timetable">';
+    //html += '<tr><th colspan="2">' + getFullDate(new Date()) + '</th></tr>';
+    html += '<tr class="d-flex text-center">';
+    html += '<td class="col-2 bold">Gregorian Year</td>';
+    html += '<td class="col-7 bold ">Prayers time</td>';
+    html += '<td class="col-3 bold">Hijri Year</td>';
+    html += '</tr>';
+    html += '<tr class="d-flex">';
+    html += '<td class="col-1 bold">' + months[_currentMonth] + '</td>';
+    html += '<td class="col-1 bold">Day</td>';
+    for (var i in list) {
+        html += '<td class="col-1 bold">' + list[i] + '</td>';
+    }
+    html += '<td class="col-1 bold">Hijri</td>';
+    html += '<td class="col-1 bold">Month</td>';
+    html += '<td class="col-1 bold">Year</td>';
+    html += '</tr>';
+    for (var i = 1; i <= _totalDays; i++) {
+        var _date = new Date(_currentYear, _currentMonth,i);
+        var times = prayTimes.getTimes(_date, [position.coords.latitude, position.coords.longitude]);
+        var _islamicDay = new Intl.DateTimeFormat('en-SA-u-ca-islamic', { day: 'numeric', }).format(_date);
+        var _islamicMonth = new Intl.DateTimeFormat('en-SA-u-ca-islamic', { month: 'long' }).format(_date);
+        var _islamicYear = new Intl.DateTimeFormat('en-SA-u-ca-islamic', { year: 'numeric' }).format(_date);
+        html += '<tr class="d-flex">';
+        html += '<td class="col-1">' + i + '</td>';
+        html += '<td class="col-1">' + getDayOfTheWeek(_date) + '</td>';
+      
+        
+        for (var k in list) {
+            html += '<td class="col-1">' + times[list[k].toLowerCase()] + '</td>';
+        }
+        html += '<td class="col-1">' + _islamicDay + '</td>';
+        html += '<td class="col-1">' + _islamicMonth + '</td>';
+        html += '<td class="col-1">' + _islamicYear + '</td>';
+        html += '</tr>';
+    }
+    html += '</table>';
+    document.getElementById('tblNamazTimeForMonth').innerHTML = html;
+}
+
+
+/////////////// Namaz Timing Page - End ////////////////////////////////
+
+/////////////// Currency Converter Page - Start ////////////////////////////////
+
+function convert() {
+    var _amount = $('#txtAmount').val();
+    var _fromCurrency = $('#drpFromCurrency').val();
+    var _toCurrency = $('#drpToCurrency').val();
+    $.ajax({
+        type: 'get',
+        url: '/convertCurrency?amount=' + _amount + '&fromCurrency=' + _fromCurrency + '&toCurrency=' + _toCurrency,
+        success: function (data) {
+            var _convertedAmount = Math.round((data * _amount) * 100) / 100;
+            $('#convertedAmount').text(_amount + ' ' + _fromCurrency + ' = ' + _convertedAmount + ' ' + _toCurrency);
+            $('#todaysRate').text('1 ' + _fromCurrency + ' = ' + data + ' ' + _toCurrency);
+        }
+    });
+}
+function InitCurrencyConverter() {
+    $('.first-currency-detail, .second-currency-detail').addClass('hidden');
+    $('.select2').select2();
+}
+function getCurrencyByID(currencyID) {
+   return $.ajax({
+        type: 'get',
+        url: '/getCurrencyByID?currencyID=' + currencyID
+    });
+}
+
+function showFromCurrencyDetail() {
+    $('.first-currency-detail').removeClass('hidden');
+    var _currencyID = $('#drpFromCurrency option:selected')[0].value;
+    getCurrencyByID(_currencyID).done(function (currency) {
+        $('#spnFirstCurrencyCountryName').text(currency.name);
+        $('#spnFirstCurrencyCountryShortForm').text(currency.alpha3);
+        $('#spnFirstCurrencyName').text(currency.currencyName);
+        $('#spnFirstCurrencyShortForm').text(currency.currencyId);
+        $('#spnFirstCurrencySymbol').text(currency.currencySymbol);
+    });
+}
+function showToCurrencyDetail() {
+    $('.second-currency-detail').removeClass('hidden');
+    var _currencyID = $('#drpToCurrency option:selected')[0].value;
+    getCurrencyByID(_currencyID).done(function (currency) {
+        $('#spnSecondCurrencyCountryName').text(currency.name);
+        $('#spnSecondCurrencyCountryShortForm').text(currency.alpha3);
+        $('#spnSecondCurrencyName').text(currency.currencyName);
+        $('#spnSecondCurrencyShortForm').text(currency.currencyId);
+        $('#spnSecondCurrencySymbol').text(currency.currencySymbol);
+    });
+   
+}
+
+/////////////// Currency Converter Page - End ////////////////////////////////

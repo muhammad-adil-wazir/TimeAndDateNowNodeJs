@@ -32,43 +32,33 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="lib\jquery\core.js" />
+    <Compile Include="lib\jquery\jquery.js" />
     <Compile Include="lib\jquery\jquery.min.js" />
+    <Compile Include="lib\jquery\jquery.slim.js" />
+    <Compile Include="lib\jquery\jquery.slim.min.js" />
     <Compile Include="lib\twitter-bootstrap\js\bootstrap.min.js" />
-    <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\menu.js" />
     <Compile Include="public\javascripts\leaflet-src.js" />
     <Compile Include="public\javascripts\leaflet.js" />
     <Compile Include="public\javascripts\moment-hijri.js" />
     <Compile Include="public\javascripts\moment-timezone.min.js" />
     <Compile Include="public\javascripts\moment.min.js" />
-    <Compile Include="public\javascripts\popper.min.js" />
-    <Compile Include="public\javascripts\PrayTimes.js" />
-    <Compile Include="public\javascripts\select2.min.js" />
     <Compile Include="public\javascripts\suncalc.min.js" />
     <Compile Include="public\javascripts\timenow.js" />
-    <Compile Include="routes\currencyconverter.js" />
-    <Compile Include="routes\calender.js" />
-    <Compile Include="routes\namaztiming.js" />
-    <Compile Include="routes\hijricalender.js" />
     <Compile Include="routes\about.js" />
     <Compile Include="routes\contact.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\test.js" />
-    <Compile Include="routes\tools.js">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="routes\users.js" />
     <Content Include="lib\jquery\jquery.min.map" />
+    <Content Include="lib\jquery\jquery.slim.min.map" />
     <Content Include="lib\twitter-bootstrap\css\bootstrap.min.css" />
     <Content Include="lib\twitter-bootstrap\js\bootstrap.min.js.map" />
     <Content Include="package.json" />
     <Content Include="public\images\sunrise.png" />
     <Content Include="public\images\sunset.png" />
-    <Content Include="public\javascripts\countryCurrencies.json" />
     <Content Include="public\javascripts\countries.json" />
-    <Content Include="public\javascripts\aaa.json">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="public\javascripts\suncalc.min.js.map" />
     <Content Include="public\javascripts\timezone.json" />
     <Content Include="public\javascripts\world-country-names.csv" />
@@ -83,12 +73,8 @@
     <Content Include="public\javascripts\leaflet.js.map" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="public\stylesheets\menu.css" />
-    <Content Include="public\stylesheets\select2.min.css" />
     <Content Include="README.md" />
-    <Content Include="views\currencyconverter.pug" />
-    <Content Include="views\namaztiming.pug" />
-    <Content Include="views\hijricalender.pug" />
-    <Content Include="views\calender.pug" />
+    <None Include="TimeNow.pubxml" />
     <Content Include="views\about.pug" />
     <Content Include="views\contact.pug" />
     <Content Include="views\index-copy.pug" />

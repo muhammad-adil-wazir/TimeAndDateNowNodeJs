@@ -1,11 +1,9 @@
 ﻿extends layout
 
 block content
-
-    #container.col
+    #container.col.cover-container.d-flex.h-100.p-3.mx-auto.flex-column.container
         .row
-            .col-lg-1.col-md-1.col-sm-1
-            .col-lg-10.col-md-10.col-sm-10.no-padding
+            .col-lg-12.col-md-12.col-sm-12.no-padding
                 .row
                     .col-lg-9.col-md-12.col-sm-12
                       h1#timeZone.bold
@@ -48,14 +46,13 @@ block content
                         canvas#cvsAnalogClock
 
         .row
-            .col-lg-1.col-md-1
-            .col-lg-10.col-md-12.no-padding
+            .col-lg-12.col-md-12.no-padding
                 .row.outof-timezone-map
                     .col-md-12.current-timezone-countries
                         h3.bold Countries in the current Time Zone
                         h3.currentTimeZoneCountries
                 .row
-                    .col-lg-10.col-md-12
+                    .col-lg-10.col-md-10
                         .timezone-map-wrapper.bg-blue
                             svg.timezone-map
                             #currentTimeZoneCountries-wrapper.current-timezone-countries
@@ -63,17 +60,14 @@ block content
                                 hr
                                 .currentTimeZoneCountries
                             .tooltip
-                    .col-lg-2.col-md-12.col-sm-12#main-cities-times-warapper             
+                    .col-lg-2.col-md-12.col-sm-12#main-cities-times-wrapper             
                         
-                
-        
     script.
-        var countries = new Array();
-        var zones = new Array();
-        var indexs = new Array();
         $(document).ready(function () {
             countries = !{ JSON.stringify(countries) }
             zones = !{ JSON.stringify(zones) }
+            var stringZones  = JSON.stringify(zones);
+            setLocationStorage(countries,stringZones);
             //country = countries.filter(x=>x.zones.filter(z=>z == timeZone.toLowerCase()));
             //marquee#main-cities-times-warapper(direction='down', scrollamount="1")
         });
