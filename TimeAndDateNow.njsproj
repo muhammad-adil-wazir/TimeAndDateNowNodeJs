@@ -58,12 +58,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes\users.js" />
+    <Content Include="public\favicon.ico" />
     <Content Include="lib\jquery\jquery.min.map" />
     <Content Include="lib\twitter-bootstrap\css\bootstrap.min.css" />
     <Content Include="lib\twitter-bootstrap\js\bootstrap.min.js.map" />
     <Content Include="package.json" />
     <Content Include="public\images\sunrise.png" />
     <Content Include="public\images\sunset.png" />
+    <Content Include="public\javascripts\bootstrap.min.css.map" />
+    <Content Include="public\javascripts\bootstrap.min.js.map" />
     <Content Include="public\javascripts\countryCurrencies.json" />
     <Content Include="public\javascripts\countries.json" />
     <Content Include="public\javascripts\aaa.json">

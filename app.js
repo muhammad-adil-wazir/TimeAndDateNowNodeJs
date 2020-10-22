@@ -17,7 +17,7 @@ var routes = require('./routes/index');
 //var hijricalender = require('./routes/hijricalender');
 //var currencyconverter = require('./routes/currencyconverter');
 //var tools = require('./routes/tools');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 //var test = require('./routes/test');
 
 var app = express();
@@ -27,7 +27,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+//app.use(favicon(__dirname + '/favicon.ico'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+//app.use('/favicon.ico', express.static('public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,6 +44,7 @@ app.use('/', routes);
 //app.use('/hijricalender', hijricalender);
 //app.use('/about', about);
 //app.use('/currencyconverter', currencyconverter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

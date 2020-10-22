@@ -357,6 +357,7 @@ function loadSunTiming() {
 /////////////// Namaz Timing Page - Start ////////////////////////////////
 
 function loadNamazTimings() {
+    $('.select2').select2();
     getLocationStorage();
     loadTimeZone();
     var _latLong = getLatLongByTimeZone(timeZonee);
@@ -393,16 +394,18 @@ function loadNamazTimings() {
         }
     }
     sel.appendChild(fragment);
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(loadNamazTableForToday);
-        navigator.geolocation.getCurrentPosition(loadNamazTableForMonth);
-    }
+    loadNamazTableForToday(_latLong);
+    loadNamazTableForMonth(_latLong);
+    //if (navigator.geolocation) {
+    //    navigator.geolocation.getCurrentPosition(loadNamazTableForToday);
+    //    navigator.geolocation.getCurrentPosition(loadNamazTableForMonth);
+    //}
 }
 
 function loadNamazTableForToday(position) {
     prayTimes.setMethod('Karachi');
     var date = new Date(); // today
-    var times = prayTimes.getTimes(date, [position.coords.latitude, position.coords.longitude]);
+    var times = prayTimes.getTimes(date, [position.lat, position.long]);
     var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Midnight'];
     document.getElementById('selectedTodayNamazTiming').innerText = 'Namaz Timing today ( ' + getFullDate(new Date()) + ' )';
     var html = '<table id="timetable">';
@@ -422,7 +425,7 @@ function loadNamazTableForToday(position) {
 }
 
 function loadNamazTableForMonth(position) {
-    prayTimes.setMethod('MWL');
+    prayTimes.setMethod('Karachi');
     _todayDate = new Date();
     var _currentMonth = _todayDate.getMonth() ;
     var _currentYear = _todayDate.getFullYear();
@@ -450,7 +453,7 @@ function loadNamazTableForMonth(position) {
     html += '</tr>';
     for (var i = 1; i <= _totalDays; i++) {
         var _date = new Date(_currentYear, _currentMonth,i);
-        var times = prayTimes.getTimes(_date, [position.coords.latitude, position.coords.longitude]);
+        var times = prayTimes.getTimes(date, [position.lat, position.long]);
         var _islamicDay = new Intl.DateTimeFormat('en-SA-u-ca-islamic', { day: 'numeric', }).format(_date);
         var _islamicMonth = new Intl.DateTimeFormat('en-SA-u-ca-islamic', { month: 'long' }).format(_date);
         var _islamicYear = new Intl.DateTimeFormat('en-SA-u-ca-islamic', { year: 'numeric' }).format(_date);

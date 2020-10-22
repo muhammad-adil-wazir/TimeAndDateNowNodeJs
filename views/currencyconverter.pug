@@ -10,13 +10,12 @@ block content
            //- h1.cover-heading.col-lg-6  Amount 
            //- h1.cover-heading.col-lg-6  Convert To 
         .row.dropdowns.text-center
-            .lead.col-lg-6
+            .lead.col-lg-6.col-md-12.col-sm-12
                 select#drpFromCurrency.select2(onchange='showFromCurrencyDetail()')
                     option Convert From
                     each currencyCountry in currencyCountries
                      option(href='#' value=currencyCountry.currencyId) #{currencyCountry.currencyName} (#{currencyCountry.currencyId})
-                
-            .lead.col-lg-6
+            .lead.col-lg-6.col-md-12.col-sm-12
                 select#drpToCurrency.select2(onchange='showToCurrencyDetail()')
                     option Convert To
                     each currencyCountry in currencyCountries
