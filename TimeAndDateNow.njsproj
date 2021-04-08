@@ -63,6 +63,7 @@
     <Content Include="lib\twitter-bootstrap\css\bootstrap.min.css" />
     <Content Include="lib\twitter-bootstrap\js\bootstrap.min.js.map" />
     <Content Include="package.json" />
+    <Content Include="public\images\logo.png" />
     <Content Include="public\images\sunrise.png" />
     <Content Include="public\images\sunset.png" />
     <Content Include="public\javascripts\bootstrap.min.css.map" />
